@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat Room</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
   body {
     background-color: black;
@@ -16,10 +17,9 @@
   .container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    max-width: 600px;
+    height: 100vh; /* Changed to 100vh */
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
   }
 
@@ -30,6 +30,7 @@
     padding: 10px;
     margin-bottom: 20px;
     overflow-y: scroll;
+    height: 100%; /* Added to fill container height */
   }
 
   #chat-box::-webkit-scrollbar {
@@ -74,60 +75,21 @@
   #send-button:hover {
     background-color: #0056b3;
   }
-
-  /* Popup */
-  #popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #popup {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-
-  #popup input {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-  }
-
-  #popup button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  #popup button:hover {
-    background-color: #0056b3;
-  }
 </style>
 </head>
 <body>
 
-<div id="popup-overlay">
-  <div id="popup">
-    <h2>Enter Your Username</h2>
-    <input type="text" id="username-input" placeholder="Username">
-    <button id="enter-button">Enter</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://i.ibb.co/P9htP7c/image-1.png" width="91" height="63" class="d-inline-block align-top" alt="">
+      Chat Room
+    </a>
+    <div class="d-flex">
+      <button class="btn btn-primary" type="button">Button</button>
+    </div>
   </div>
-</div>
+</nav>
 
 <div class="container">
   <div id="chat-box">
@@ -143,37 +105,18 @@
   const chatBox = document.getElementById('chat-box');
   const messageInput = document.getElementById('message-input');
   const sendButton = document.getElementById('send-button');
-  const popupOverlay = document.getElementById('popup-overlay');
-  const usernameInput = document.getElementById('username-input');
-  const enterButton = document.getElementById('enter-button');
 
-  let username = '';
-
-  // Show popup to enter username
-  setTimeout(() => {
-    popupOverlay.style.display = 'flex';
-  }, 500);
-
-  // Enter username
-  enterButton.addEventListener('click', () => {
-    username = usernameInput.value.trim();
-    if (username !== '') {
-      popupOverlay.style.display = 'none';
-    }
-  });
-
-  // Send message
   sendButton.addEventListener('click', () => {
     const message = messageInput.value.trim();
     if (message !== '') {
-      appendMessage(username, message);
+      appendMessage(message);
       messageInput.value = '';
     }
   });
 
-  function appendMessage(username, message) {
+  function appendMessage(message) {
     const messageElement = document.createElement('div');
-    messageElement.textContent = `${username}: ${message}`;
+    messageElement.textContent = message;
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
