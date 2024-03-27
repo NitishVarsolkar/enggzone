@@ -162,3 +162,15 @@ input:checked + .slider:before {
 #reloadButton:disabled {
     cursor: not-allowed;
 }
+
+/* styles.css */
+a {
+    color: inherit; /* Use the parent element's color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Optionally, you can style the link on hover or focus */
+a:hover,
+a:focus {
+    text-decoration: underline; /* Add underline on hover or focus if desired */
+}
