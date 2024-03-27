@@ -28,10 +28,9 @@ function simulateReload() {
             disableButton();
         } else {
             updateReloadCount();
-            alert("Page has been virtually reloaded.");
         }
     } else {
-        updateReloadCount();
+        updateReloadCount();        
     }
 }
 
