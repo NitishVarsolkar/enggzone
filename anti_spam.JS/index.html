@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Button</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>NAV®️ Anti_Spam</h1>
+    <div class="container">
+        <label class="switch">
+            <input type="checkbox" id="loginSwitch">
+            <span class="slider"></span>
+        </label>
+        <span id="loginStatus">Non Logged in</span>
+    </div>
+    <button id="reloadButton" onclick="simulateReload()">Reload</button>
+    <div id="reloadCount">0</div>
+
+    <!-- Popup for last chance -->
+    <div id="lastChancePopup" class="popup">
+        <h2>Last Chance!</h2>
+        <p>It's your last chance to Sign Up/Sign In or else your IP will be blocked.</p>
+        <button onclick="closeLastChancePopup()">Close</button>
+    </div>
+
+    <!-- Popup for blocking IP -->
+    <div id="blockIPPopup" class="popup">
+        <h2>IP Blocked!</h2>
+        <p>Sorry, but we are blocking your IP for 12 hours.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
