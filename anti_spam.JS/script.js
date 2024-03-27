@@ -32,7 +32,6 @@ function simulateReload() {
         }
     } else {
         updateReloadCount();
-        alert("Page has been virtually reloaded.");
     }
 }
 
