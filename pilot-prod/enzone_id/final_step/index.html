@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <!-- Bootstrap Navbar -->
+  <nav class="navbar bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="https://i.ibb.co/wyRDLN0/image.png" alt="Bootstrap" width="" height="24">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <!-- Signup Form -->
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" id="newPassword" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // Show alert on page load
+    window.onload = function() {
+      showAlert("Your Video ID was Successfully verified", "alert-success");
+    };
+
+    // Handle form submission
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Check if passwords match
+      var newPassword = document.getElementById("newPassword").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      if (newPassword !== confirmPassword) {
+        showAlert("Passwords do not match", "alert-danger");
+        return;
+      }
+
+      // Show success alert
+      showAlert("Yay! You were signed up", "alert-success");
+    });
+
+    // Function to show alert
+    function showAlert(message, className) {
+      // Create alert element
+      var alertDiv = document.createElement("div");
+      alertDiv.className = "alert " + className;
+      alertDiv.appendChild(document.createTextNode(message));
+      // Insert alert before the navbar
+      var navbar = document.querySelector(".navbar");
+      navbar.parentNode.insertBefore(alertDiv, navbar.nextSibling);
+      // Hide alert after 3 seconds
+      setTimeout(function() {
+        alertDiv.remove();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
