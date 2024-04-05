@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Navbar with Content</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Center content vertically and horizontally */
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    /* Circular video input */
+    .video-container {
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .video-container video {
+      width: 300px;
+      height: 300px;
+    }
+    /* GIF */
+    .gif-container {
+      margin-bottom: 20px;
+    }
+    .gif-container img {
+      width: 50px;
+      height: 50px;
+    }
+    /* Table */
+    .table-container {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Bootstrap Navbar -->
+  <nav class="navbar bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="https://i.ibb.co/wyRDLN0/image.png" alt="Bootstrap" width="" height="24">
+      </a>
+    </div>
+  </nav>
+  
+
+  <!-- Main Content -->
+  <div class="container center-content">
+    <!-- Circular Video Input -->
+    <div class="video-container">
+      <video autoplay></video>
+    </div>
+    <!-- GIF -->
+    <div class="gif-container">
+      <img src="https://i.ibb.co/JRXnM8D/man-turn-head.gif" alt="GIF">
+    </div>
+
+    <h5>Rotate Your Head as Shown above<br>& Repeat Numbers Shown below</h5><br>
+    *Do it under 10 Seconds<br><br>
+    <!-- Random Number Table -->
+    <div class="table-container">
+      <table class="table table-bordered">
+        <thead>
+         
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Submit Button -->
+    <button id="submitBtn" class="btn btn-primary">Submit</button>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // Function to generate random numbers and populate table horizontally
+    function generateRandomNumbers() {
+      var tbody = document.querySelector('.table tbody');
+      tbody.innerHTML = ''; // Clear previous content
+      
+      var row = document.createElement('tr');
+      for (var i = 0; i < 4; i++) {
+        var cell = document.createElement('td');
+        cell.textContent = Math.floor(Math.random() * 10); // Generate random number between 0 and 9
+        row.appendChild(cell);
+      }
+      tbody.appendChild(row);
+    }
+    
+    // Call the function when the page loads
+    window.onload = generateRandomNumbers;
+
+    // Access camera and stream video
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        var video = document.querySelector('video');
+        video.srcObject = stream;
+      })
+      .catch(function (err) {
+        console.log('Error accessing camera: ', err);
+      });
+
+    // Handle click event on submit button
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      // Show success alert
+      showAlert("Success!", "alert-success");
+      // Redirect to xyz.com after 2 seconds
+      setTimeout(function() {
+        window.location.href = "https://xyz.com";
+      }, 2000);
+    });
+
+    // Function to show alert
+    function showAlert(message, className) {
+      // Create alert element
+      var alertDiv = document.createElement("div");
+      alertDiv.className = "alert " + className;
+      alertDiv.appendChild(document.createTextNode(message));
+      // Insert alert before the navbar
+      var navbar = document.querySelector(".navbar");
+      navbar.parentNode.insertBefore(alertDiv, navbar.nextSibling);
+      // Hide alert after 2 seconds
+      setTimeout(function() {
+        alertDiv.remove();
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
