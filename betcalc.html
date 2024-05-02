@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bet Calculator</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS can be added here */
+    body {
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <!-- Modal for Input -->
+  <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inputModalLabel">Enter Bet Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="wagAmtInput">
+            <div class="form-group">
+              <label for="wagAmt">Enter Wag Amt:</label>
+              <input type="number" class="form-control" id="wagAmt" placeholder="Enter Wag Amt" required onkeypress="return nextInput(event)">
+            </div>
+          </div>
+          <div id="multiplierInput" style="display:none">
+            <div class="form-group">
+              <label for="multiplier">Enter Multiplier:</label>
+              <input type="number" step="0.01" class="form-control" id="multiplier" placeholder="Enter Multiplier" required onkeypress="return nextInput(event)">
+            </div>
+          </div>
+          <div id="numWinsInput" style="display:none">
+            <div class="form-group">
+              <label for="numWins">Enter Number of Wins:</label>
+              <input type="number" class="form-control" id="numWins" placeholder="Enter Number of Wins" required onkeypress="return nextInput(event)">
+            </div>
+          </div>
+          <div id="numLossInput" style="display:none">
+            <div class="form-group">
+              <label for="numLoss">Enter Number of Loss:</label>
+              <input type="number" class="form-control" id="numLoss" placeholder="Enter Number of Loss" required onkeypress="return calculateProfit(event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Function to show next input field
+    function nextInput(event) {
+      if (event.keyCode === 13) { // 13 is the Enter key code
+        event.preventDefault();
+        var currentInput = $(".modal-body").find("div:visible");
+        currentInput.hide();
+        currentInput.next().show();
+        return false; // Prevent form submission
+      }
+    }
+
+    // Function to calculate profit
+    function calculateProfit(event) {
+      if (event.keyCode === 13) { // 13 is the Enter key code
+        event.preventDefault();
+        let wag = parseFloat($("#wagAmt").val());
+        let mult = parseFloat($("#multiplier").val());
+        let win = parseInt($("#numWins").val());
+        let loss = parseInt($("#numLoss").val());
+        let s1 = mult * win * wag;
+        let s2 = loss * wag;
+        let profit = s1 - s2 - wag;
+        alert("Profit is " + profit.toFixed(2));
+        // Close modal after calculation
+        $("#inputModal").modal("hide");
+        return false; // Prevent form submission
+      }
+    }
+
+    // Show modal on page load
+    $(document).ready(function() {
+      $("#inputModal").modal("show");
+    });
+  </script>
+</body>
+</html>
